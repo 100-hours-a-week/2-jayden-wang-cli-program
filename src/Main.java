@@ -14,13 +14,20 @@ public class Main {
         Order order = new Order();
 
         System.out.println("\n 🍔맥도날드 주문을 시작합니다🍔");
-        System.out.println("🔹 1단계: 햄버거를 선택하세요.");
-        for (int i = 0; i < Burger.BURGERS.size(); i++) {
-            Burger burger = Burger.BURGERS.get(i);
-            System.out.println((i + 1) + ")" + burger.getName() + " : " + burger.getPrice());
+        int burgerChoice;
+        while(true) {
+            System.out.println("\n 🔹 1단계: 햄버거를 선택하세요.");
+            for (int i = 0; i < Burger.BURGERS.size(); i++) {
+                Burger burger = Burger.BURGERS.get(i);
+                System.out.println((i + 1) + ")" + burger.getName() + " : " + burger.getPrice());
+            }
+            System.out.print("선택: ");
+            burgerChoice = scanner.nextInt();
+            if (burgerChoice >= 1 && burgerChoice <= Burger.BURGERS.size()) {
+                break;
+            }
+            System.out.println("\n ❌ 메뉴에 있는 번호를 선택해주세요.");
         }
-        System.out.print("선택: ");
-        int burgerChoice = scanner.nextInt();
         order.setBurger(Burger.getBurger(burgerChoice));
         scanner.nextLine();
 
@@ -30,56 +37,75 @@ public class Main {
         order.setSetMenu(isSet);
 
         if (isSet) {
-            System.out.println("\n🔹 2단계: 사이드를 선택하세요.");
-            for (int i = 0; i < Side.SIDES.size(); i++) {
-                Side side = Side.SIDES.get(i);
-                System.out.println((i + 1) + ")" + side.getName() + " : " + side.getPrice());
+            int sideChoice;
+            while (true) {
+                System.out.println("\n 🔹 2단계: 사이드를 선택하세요.");
+                for (int i = 0; i < Side.SIDES.size(); i++) {
+                    Side side = Side.SIDES.get(i);
+                    System.out.println((i + 1) + ")" + side.getName() + " : " + side.getPrice());
+                }
+                System.out.print("선택: ");
+                sideChoice = scanner.nextInt();
+                if (sideChoice >= 1 && sideChoice <= Side.SIDES.size()) {
+                    break;
+                }
+                System.out.println("\n ❌ 메뉴에 있는 번호를 선택해주세요.");
             }
-            System.out.print("선택: ");
-            int sideChoice = scanner.nextInt();
             order.setSide(Side.getSide(sideChoice));
             scanner.nextLine();
 
             System.out.println("\n추가 사이드 선택을 하시겠습니까? (Y/N)");
             String additionalChoice = scanner.nextLine();
             if (additionalChoice.equalsIgnoreCase("Y")) {
-                System.out.println("\n어떤 추가 사이드 선택을 하시겠습니까?");
-                List<String> sideCategories = AdditionalSide.CATEGORIES;
-                for (int i = 0; i < sideCategories.size(); i++) {
-                    System.out.println((i + 1) + ") " + sideCategories.get(i));
+                int categoryChoice;
+                while (true) {
+                    System.out.println("\n어떤 추가 사이드 선택을 하시겠습니까?");
+                    for (int i = 0; i < AdditionalSide.CATEGORIES.size(); i++) {
+                        System.out.println((i + 1) + ") " + AdditionalSide.CATEGORIES.get(i));
+                    }
+                    System.out.print("선택: ");
+                    categoryChoice = scanner.nextInt();
+                    if (categoryChoice >= 1 && categoryChoice <= AdditionalSide.CATEGORIES.size()) {
+                        break;
+                    }
+                    System.out.println("\n ❌ 메뉴에 있는 번호를 선택해주세요.");
                 }
-                System.out.print("선택: ");
-                int categoryChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                String selectedCategory = sideCategories.get(categoryChoice);
-                if (!selectedCategory.isEmpty()) {
-                    List<AdditionalSide> additionalSides = AdditionalSide.getAdditionalSideByCatecory(selectedCategory);
+                String selectedCategory = AdditionalSide.CATEGORIES.get(categoryChoice - 1);
+                List<AdditionalSide> additionalSides = AdditionalSide.getAdditionalSideByCatecory(selectedCategory);
 
-                    System.out.println("\n🔹 " + selectedCategory + " 메뉴:");
+                int additionalSideChoice;
+                while (true) {
+                    System.out.println("\n 🔹 " + selectedCategory + " 메뉴:");
                     for (int i = 0; i < additionalSides.size(); i++) {
                         System.out.println((i + 1) + ") " + additionalSides.get(i).getName() + " : " + additionalSides.get(i).getPrice());
                     }
-
                     System.out.print("선택: ");
-                    int additionalSideChoice = scanner.nextInt();
-                    scanner.nextLine();
-
+                    additionalSideChoice = scanner.nextInt();
                     if (additionalSideChoice >= 1 && additionalSideChoice <= additionalSides.size()) {
-                        order.setAdditionalSide(additionalSides.get(additionalSideChoice - 1));
-                    } else {
-                        System.out.println("잘못된 선택입니다. 추가 선택이 반영되지 않았습니다.");
+                        break;
                     }
+                    System.out.println("\n ❌ 메뉴에 있는 번호를 선택해주세요.");
                 }
+                order.setAdditionalSide(additionalSides.get(additionalSideChoice - 1));
+                scanner.nextLine();
             }
 
-            System.out.println("\n🔹 3단계: 음료를 선택하세요.");
-            for (int i = 0; i < Drink.DRINKS.size(); i++) {
-                Drink drink = Drink.DRINKS.get(i);
-                System.out.println((i + 1) + ")" + drink.getName() + " : " + drink.getPrice());
+            int drinkChoice;
+            while (true) {
+                System.out.println("\n 🔹 3단계: 음료를 선택하세요.");
+                for (int i = 0; i < Drink.DRINKS.size(); i++) {
+                    Drink drink = Drink.DRINKS.get(i);
+                    System.out.println((i + 1) + ")" + drink.getName() + " : " + drink.getPrice());
+                }
+                System.out.print("선택: ");
+                drinkChoice = scanner.nextInt();
+                if (drinkChoice >= 1 && drinkChoice <= Drink.DRINKS.size()) {
+                    break;
+                }
+                System.out.println("\n ❌ 메뉴에 있는 번호를 선택해주세요.");
             }
-            System.out.print("선택: ");
-            int drinkChoice = scanner.nextInt();
             order.setDrink(Drink.getDrink(drinkChoice));
             scanner.nextLine();
         }
