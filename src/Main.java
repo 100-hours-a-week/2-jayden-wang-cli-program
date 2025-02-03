@@ -14,13 +14,11 @@ public class Main {
         Order order = new Order();
 
         System.out.println("\n 🍔맥도날드 주문을 시작합니다🍔");
-
         System.out.println("🔹 1단계: 햄버거를 선택하세요.");
-        System.out.println("1) 치즈버거 : 3000");
-        System.out.println("2) 불고기버거 : 3500");
-        System.out.println("3) 빅맥 : 5000");
-        System.out.println("4) 1955버거 : 6000");
-        System.out.println("5) 베이컨 토마토 디럭스 버거 : 7000");
+        for (int i = 0; i < Burger.BURGERS.size(); i++) {
+            Burger burger = Burger.BURGERS.get(i);
+            System.out.println((i + 1) + ")" + burger.getName() + " : " + burger.getPrice());
+        }
         System.out.print("선택: ");
         int burgerChoice = scanner.nextInt();
         order.setBurger(Burger.getBurger(burgerChoice));
@@ -33,8 +31,10 @@ public class Main {
 
         if (isSet) {
             System.out.println("\n🔹 2단계: 사이드를 선택하세요.");
-            System.out.println("1) 감자튀김 S : +0");
-            System.out.println("2) 감자튀김 L : +500");
+            for (int i = 0; i < Side.SIDES.size(); i++) {
+                Side side = Side.SIDES.get(i);
+                System.out.println((i + 1) + ")" + side.getName() + " : " + side.getPrice());
+            }
             System.out.print("선택: ");
             int sideChoice = scanner.nextInt();
             order.setSide(Side.getSide(sideChoice));
@@ -79,11 +79,10 @@ public class Main {
             }
 
             System.out.println("\n🔹 3단계: 음료를 선택하세요.");
-            System.out.println("1) 콜라 : +0");
-            System.out.println("2) 사이다 : +0");
-            System.out.println("3) 오렌지 주스 : +500");
-            System.out.println("4) 바닐라 쉐이크 : +500");
-            System.out.println("5) 초코 쉐이크 : +500");
+            for (int i = 0; i < Drink.DRINKS.size(); i++) {
+                Drink drink = Drink.DRINKS.get(i);
+                System.out.println((i + 1) + ")" + drink.getName() + " : " + drink.getPrice());
+            }
             System.out.print("선택: ");
             int drinkChoice = scanner.nextInt();
             order.setDrink(Drink.getDrink(drinkChoice));
