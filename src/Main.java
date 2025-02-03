@@ -37,8 +37,15 @@ public class Main {
         order.setBurger(Burger.getBurger(burgerChoice));
         scanner.nextLine();
 
-        System.out.println("\n세트로 주문하시겠습니까? (Y/N)");
-        String setChoice = scanner.nextLine();
+        String setChoice;
+        while (true) {
+            System.out.println("\n세트로 주문하시겠습니까? (Y/N)");
+            setChoice = scanner.nextLine();
+            if (setChoice.equalsIgnoreCase("Y") || setChoice.equalsIgnoreCase("N")) {
+                break;
+            }
+            System.out.println("\n ❌ Y 또는 N을 입력해주세요.");
+        }
         boolean isSet = setChoice.equalsIgnoreCase("Y");
         order.setSetMenu(isSet);
 
@@ -65,10 +72,18 @@ public class Main {
             order.setSide(Side.getSide(sideChoice));
             scanner.nextLine();
 
-            System.out.println("\n추가 사이드 선택을 하시겠습니까? (Y/N)");
-            String additionalChoice = scanner.nextLine();
+            String additionalChoice;
+            while (true) {
+                System.out.println("\n추가 사이드 선택을 하시겠습니까? (Y/N)");
+                additionalChoice = scanner.nextLine();
+                if (additionalChoice.equalsIgnoreCase("Y") || additionalChoice.equalsIgnoreCase("N")) {
+                    break;
+                }
+                System.out.println("\n ❌ Y 또는 N을 입력해주세요.");
+            }
+
             if (additionalChoice.equalsIgnoreCase("Y")) {
-                int categoryChoice;
+                int additionalSideCategoryChoice;
                 while (true) {
                     try {
                         System.out.println("\n어떤 추가 사이드 선택을 하시겠습니까?");
@@ -76,8 +91,8 @@ public class Main {
                             System.out.println((i + 1) + ") " + AdditionalSide.CATEGORIES.get(i));
                         }
                         System.out.print("선택: ");
-                        categoryChoice = scanner.nextInt();
-                        if (categoryChoice >= 1 && categoryChoice <= AdditionalSide.CATEGORIES.size()) {
+                        additionalSideCategoryChoice = scanner.nextInt();
+                        if (additionalSideCategoryChoice >= 1 && additionalSideCategoryChoice <= AdditionalSide.CATEGORIES.size()) {
                             break;
                         }
                         System.out.println("\n ❌ 메뉴에 있는 번호를 선택해주세요.");
@@ -88,7 +103,7 @@ public class Main {
                 }
                 scanner.nextLine();
 
-                String selectedCategory = AdditionalSide.CATEGORIES.get(categoryChoice - 1);
+                String selectedCategory = AdditionalSide.CATEGORIES.get(additionalSideCategoryChoice - 1);
                 List<AdditionalSide> additionalSides = AdditionalSide.getAdditionalSideByCatecory(selectedCategory);
 
                 int additionalSideChoice;
@@ -136,8 +151,16 @@ public class Main {
             scanner.nextLine();
         }
 
-        System.out.println("\n주문이 완료되었습니다! 결제하시겠습니까? (Y/N)");
-        String confirm = scanner.nextLine();
+        String confirm;
+        while (true) {
+            System.out.println("\n주문이 완료되었습니다! 결제하시겠습니까? (Y/N)");
+            confirm = scanner.nextLine();
+            if (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("N")) {
+                break;
+            }
+            System.out.println("\n ❌ Y 또는 N을 입력해주세요.");
+        }
+
         if (confirm.equalsIgnoreCase("Y")) {
             order.checkout();
         } else {
