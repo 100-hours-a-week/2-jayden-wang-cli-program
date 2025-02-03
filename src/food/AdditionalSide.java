@@ -14,6 +14,8 @@ public class AdditionalSide extends Side{
         return category;
     }
 
+    public static final List<String> CATEGORIES = List.of("토핑", "소스", "맥플러리");
+
     public static final List<AdditionalSide> Topping = List.of(
             new AdditionalSide("치즈 토핑", 500, "토핑"),
             new AdditionalSide("베이컨 토핑", 700, "토핑"),

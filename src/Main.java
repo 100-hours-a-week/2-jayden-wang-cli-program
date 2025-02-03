@@ -44,20 +44,15 @@ public class Main {
             String additionalChoice = scanner.nextLine();
             if (additionalChoice.equalsIgnoreCase("Y")) {
                 System.out.println("\n어떤 추가 사이드 선택을 하시겠습니까?");
-                System.out.println("1) 토핑");
-                System.out.println("2) 소스");
-                System.out.println("3) 맥플러리");
+                List<String> sideCategories = AdditionalSide.CATEGORIES;
+                for (int i = 0; i < sideCategories.size(); i++) {
+                    System.out.println((i + 1) + ") " + sideCategories.get(i));
+                }
                 System.out.print("선택: ");
                 int categoryChoice = scanner.nextInt();
                 scanner.nextLine();
 
-                String selectedCategory = switch (categoryChoice) {
-                    case 1 -> "토핑";
-                    case 2 -> "소스";
-                    case 3 -> "맥플러리";
-                    default -> "";
-                };
-
+                String selectedCategory = sideCategories.get(categoryChoice);
                 if (!selectedCategory.isEmpty()) {
                     List<AdditionalSide> additionalSides = AdditionalSide.getAdditionalSideByCatecory(selectedCategory);
 

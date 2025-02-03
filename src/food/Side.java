@@ -1,6 +1,5 @@
 package food;
 
-import javax.print.attribute.standard.Sides;
 import java.util.List;
 
 public class Side extends Item {
