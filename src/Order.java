@@ -57,10 +57,6 @@ public class Order {
     }
 
     public void checkout() {
-        if (burger == null) {
-            System.out.println("모든 메뉴를 선택해야 합니다!");
-            return;
-        }
         showOrder();
         System.out.println("주문이 완료되었습니다. 감사합니다!");
     }
