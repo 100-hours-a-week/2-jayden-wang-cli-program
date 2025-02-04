@@ -14,8 +14,4 @@ public class Drink extends Item {
             new Drink("바닐라 쉐이크", 500),
             new Drink("초코 쉐이크", 500)
     );
-
-    public static Drink getDrink(int choice) {
-        return DRINKS.get(choice - 1);
-    }
 }

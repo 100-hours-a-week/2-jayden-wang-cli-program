@@ -14,8 +14,4 @@ public class Burger extends Item {
             new Burger("1955버거", 6000),
             new Burger("베이컨 토마토 디럭스 버거", 7000)
     );
-
-    public static Burger getBurger(int choice) {
-        return BURGERS.get(choice - 1);
-    }
 }

@@ -12,7 +12,4 @@ public class Side extends Item {
             new Side("감자튀김 L", 500)
     );
 
-    public static Side getSide(int choice) {
-        return SIDES.get(choice - 1);
-    }
 }
