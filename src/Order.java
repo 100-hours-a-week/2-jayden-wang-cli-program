@@ -7,6 +7,18 @@ public class Order {
     private Drink drink;
     private boolean isSet = false;
 
+    public Burger getBurger() {
+        return burger;
+    }
+
+    public Side getSdie() {
+        return side;
+    }
+
+    public Drink getDrink() {
+        return drink;
+    }
+
     public void setBurger(Burger burger) {
         this.burger = burger;
     }

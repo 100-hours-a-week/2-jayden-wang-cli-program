@@ -1,6 +1,7 @@
 import food.*;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +9,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         MenuSelector menuSelector = new MenuSelector(scanner);
         Order order = new Order();
+        OrderManager orderManager = new OrderManager();
+
+        OtherCustomersThread otherCustomers = new OtherCustomersThread(orderManager);
+        otherCustomers.setDaemon(true);
+        otherCustomers.start();
 
         System.out.println("\n 🍔맥도날드 주문을 시작합니다🍔");
 
@@ -58,8 +64,19 @@ public class Main {
             order.setDrink(selectedDrink);
         }
 
-        if (menuSelector.selectYesNo("주문이 완료되었습니다! 결제하시겠습니까?")) {
+        if (menuSelector.selectYesNo("주문을 완료하시겠습니까?")) {
+            int myOrderNum = orderManager.addNewOrder();
+
             order.checkout();
+            System.out.println("\n고객님의 주문번호는 " + myOrderNum + "번 입니다.");
+            System.out.println("대기중인 주문 개수는 " + orderManager.getWaitingCount() + "개입니다.");
+
+            new MenuPreparationThread("🍔 버거", order.getBurger().getName(), myOrderNum, 3000 + new Random().nextInt(2000)).start();
+
+            if (isSet) {
+                new MenuPreparationThread("🍟 사이드", order.getSdie().getName(), myOrderNum, 2000 + new Random().nextInt(2000)).start();
+                new MenuPreparationThread("🥤 음료", order.getDrink().getName(), myOrderNum, 1000).start();
+            }
         } else {
             System.out.println("주문이 취소되었습니다.");
         }
