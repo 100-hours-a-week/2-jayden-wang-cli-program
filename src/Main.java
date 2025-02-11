@@ -1,5 +1,5 @@
 import order.Order;
-import order.OrderManager;
+import order.OrderQueue;
 import food.*;
 import thread.MenuPreparationThread;
 import thread.OtherCustomersThread;
@@ -13,9 +13,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         MenuSelector menuSelector = new MenuSelector(scanner);
         Order order = new Order();
-        OrderManager orderManager = new OrderManager();
+        OrderQueue orderQueue = new OrderQueue();
 
-        OtherCustomersThread otherCustomers = new OtherCustomersThread(orderManager);
+        OtherCustomersThread otherCustomers = new OtherCustomersThread(orderQueue);
         otherCustomers.setDaemon(true);
         otherCustomers.start();
 
@@ -69,11 +69,11 @@ public class Main {
         }
 
         if (menuSelector.selectYesNo("주문을 완료하시겠습니까?")) {
-            int myOrderNum = orderManager.addNewOrder();
+            int myOrderNum = orderQueue.addNewOrder();
 
             order.checkout();
             System.out.println("\n고객님의 주문번호는 " + myOrderNum + "번 입니다.");
-            System.out.println("대기중인 주문 개수는 " + orderManager.getWaitingCount() + "개입니다.");
+            System.out.println("대기중인 주문 개수는 " + orderQueue.getWaitingCount() + "개입니다.");
 
             new MenuPreparationThread("🍔 버거", order.getBurger().getName(), myOrderNum, 3000 + new Random().nextInt(2000)).start();
 

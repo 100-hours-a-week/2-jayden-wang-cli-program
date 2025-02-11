@@ -1,14 +1,14 @@
 package thread;
 
-import order.OrderManager;
+import order.OrderQueue;
 
 import java.util.Random;
 
 public class OtherCustomersThread extends Thread{
-    private final OrderManager orderManager;
+    private final OrderQueue orderQueue;
 
-    public OtherCustomersThread(OrderManager orderManager) {
-        this.orderManager = orderManager;
+    public OtherCustomersThread(OrderQueue orderQueue) {
+        this.orderQueue = orderQueue;
     }
 
     @Override
@@ -17,10 +17,10 @@ public class OtherCustomersThread extends Thread{
             try {
                 Thread.sleep(1000 + new Random().nextInt(2000));
     
-                orderManager.addNewOrder();
+                orderQueue.addNewOrder();
     
                 if(new Random().nextInt(100) < 30) {
-                    orderManager.completeOrder();
+                    orderQueue.completeOrder();
                 }
                 
             } catch (InterruptedException e) {

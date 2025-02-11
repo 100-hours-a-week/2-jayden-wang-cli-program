@@ -3,11 +3,11 @@ package order;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class OrderManager {
+public class OrderQueue {
     private Queue<Integer> waitingOrders;
     private int lastOrderNumber;
 
-    public OrderManager() {
+    public OrderQueue() {
         this.waitingOrders = new LinkedList<>();
         this.lastOrderNumber = 0;
     }
