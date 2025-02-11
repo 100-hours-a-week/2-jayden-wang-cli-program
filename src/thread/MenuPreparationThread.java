@@ -1,3 +1,5 @@
+package thread;
+
 public class MenuPreparationThread extends Thread{
     private final String menuType;
     private final String menuName;

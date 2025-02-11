@@ -1,3 +1,7 @@
+package thread;
+
+import order.OrderManager;
+
 import java.util.Random;
 
 public class OtherCustomersThread extends Thread{

@@ -1,4 +1,8 @@
+import order.Order;
+import order.OrderManager;
 import food.*;
+import thread.MenuPreparationThread;
+import thread.OtherCustomersThread;
 
 import java.util.List;
 import java.util.Random;

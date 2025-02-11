@@ -1,4 +1,4 @@
-# McDonald Order
+# McDonald order.order
 
 ## 클래스 다이어그램
 ![제목 없는 다이어그램 drawio-2](https://github.com/user-attachments/assets/bb802ab5-b633-4252-84d8-4a6c76d51bab)
